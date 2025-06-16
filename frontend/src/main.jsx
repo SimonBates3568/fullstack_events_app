@@ -6,6 +6,7 @@ import { EventsPage } from './pages/EventsPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Root } from './components/Root';
 import { LoginPage } from './pages/LoginPage';
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 const router = createBrowserRouter([
@@ -14,21 +15,14 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: '/',
-        element: <EventsPage />,
+        element: <ProtectedRoute />, // Wrap protected routes
+        children: [
+          { path: '/', element: <EventsPage /> },
+          { path: '/events', element: <EventsPage /> },
+          { path: '/event/:eventId', element: <EventPage /> },
+        ],
       },
-      {
-        path: '/events',
-        element: <EventsPage />,
-      },
-      {
-        path: '/event/:eventId',
-        element: <EventPage />,
-      },
-      {
-        path: '/login',
-        element: <LoginPage />,
-      },
+      { path: '/login', element: <LoginPage /> },
     ],
   },
 ]);

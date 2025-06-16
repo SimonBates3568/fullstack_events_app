@@ -204,7 +204,7 @@ export const EventsPage = () => {
       image: e.image,
       startTime: e.startTime,
       endTime: e.endTime,
-      categoryId: e.categoryIds.length > 0 ? e.categoryIds[0] : null,
+      categoryId: Array.isArray(e.categoryIds) && e.categoryIds.length > 0 ? e.categoryIds[0] : null,
       location: e.location
     });
     console.log('help', e);

@@ -136,27 +136,39 @@ export const EventPage = () => {
     }
   };
 
-  // handle delete the toast
+  // handle delete the event
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/events/${eventId}`, {
-        method: 'DELETE'
-      });
-      if (!response.ok) {
-        throw new Error('Failed to delete event');
+      if (!eventId) {
+        throw new Error('Invalid event ID');
       }
-      toast({
-        title: "Event deleted.",
-        description: "The event has been successfully deleted.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No authentication token found');
+      }
+      const response = await fetch(`http://localhost:3000/events/${eventId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
-      navigate('/'); // Redirect to home page to prevent 404 errors
+      if (response.status === 204 || response.ok) {
+        toast({
+          title: "Event deleted.",
+          description: "The event has been successfully deleted.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        navigate('/'); // Redirect to home page to prevent 404 errors
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to delete event');
+      }
     } catch (error) {
       toast({
         title: "Error",
-        description: "There was an error deleting the event.",
+        description: error.message || "There was an error deleting the event.",
         status: "error",
         duration: 5000,
         isClosable: true,
