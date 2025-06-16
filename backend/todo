@@ -1,0 +1,27 @@
+/*
+TODO:
+- Implement GET /events to list all events
+- Implement GET /events/:id to fetch a single event by ID
+- Implement POST /events to add a new event
+- Implement DELETE /events/:id to delete an event by ID
+- Implement PUT /events/:id to update an event by ID
+*/
+
+
+- Implement authentication for protected routes
+- Add input validation for event data
+- Handle errors and send appropriate HTTP responses
+- Write unit tests for event endpoints
+- Add pagination to GET /events
+
+
+
+
+
+
+
+
+
+
+
+

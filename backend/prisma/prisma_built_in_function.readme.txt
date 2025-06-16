@@ -1,0 +1,67 @@
+## 📋 Prisma Client Built-in Functions (for each model)
+
+> Replace `user` with your model name (e.g., `post`, `product`, `order`, etc.)
+
+### 🟢 **Create**
+
+* `create()` – Create a single record
+* `createMany()` – Create multiple records at once
+
+---
+
+### 🔵 **Read**
+
+* `findUnique()` – Find one record by a unique field (e.g., `id`, `email`)
+* `findFirst()` – Find the first record that matches a filter
+* `findMany()` – Find all records that match a filter (or all if no filter)
+* `count()` – Count records
+* `aggregate()` – Get things like `avg`, `sum`, `min`, `max`
+* `groupBy()` – Group records and perform calculations on each group
+
+---
+
+### 🟡 **Update**
+
+* `update()` – Update a single record by unique field
+* `updateMany()` – Update multiple records that match a filter
+* `upsert()` – Update if exists, otherwise create (like merge)
+
+---
+
+### 🔴 **Delete**
+
+* `delete()` – Delete one record by unique field
+* `deleteMany()` – Delete multiple records that match a filter
+
+---
+
+## 🧠 Example with `user` model
+
+```js
+// Create a user
+await prisma.user.create({ data: { name: 'Alice', email: 'a@a.com' } });
+
+// Get all users
+await prisma.user.findMany();
+
+// Update a user
+await prisma.user.update({
+  where: { id: 1 },
+  data: { name: 'New Name' },
+});
+
+// Delete a user
+await prisma.user.delete({ where: { id: 1 } });
+```
+
+---
+
+## ✅ Summary Table
+
+| Category | Function Name                                                          |
+| -------- | ---------------------------------------------------------------------- |
+| Create   | `create`, `createMany`                                                 |
+| Read     | `findUnique`, `findFirst`, `findMany`, `count`, `aggregate`, `groupBy` |
+| Update   | `update`, `updateMany`, `upsert`                                       |
+| Delete   | `delete`, `deleteMany`                                                 |
+
