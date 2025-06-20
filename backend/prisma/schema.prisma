@@ -14,7 +14,7 @@ model User {
   username String @unique
   image    String
 
-  events   Event[] @relation("CreatedEvents")
+  events Event[] @relation("CreatedEvents")
 }
 
 model Event {

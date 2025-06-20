@@ -17,6 +17,7 @@ router.get("/", async (req, res) => {
 router.post("/", auth, async(req, res) => {
    console.log("Login body:", req.body);
   const {
+    
     title,
     description,
     location,

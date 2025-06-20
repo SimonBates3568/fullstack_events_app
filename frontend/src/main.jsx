@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Root } from './components/Root';
 import { LoginPage } from './pages/LoginPage';
 import ProtectedRoute from "./components/ProtectedRoute";
+import SignupForm from './components/SignupForm';
 
 
 const router = createBrowserRouter([
@@ -22,7 +23,15 @@ const router = createBrowserRouter([
           { path: '/event/:eventId', element: <EventPage /> },
         ],
       },
-      { path: '/login', element: <LoginPage /> },
+      { 
+        path: '/login', 
+        element: (
+          <>
+            <LoginPage />
+            <SignupForm />
+          </>
+        ) 
+      },
     ],
   },
 ]);

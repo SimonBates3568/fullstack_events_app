@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Heading, Box, Button, Input, FormControl, FormLabel, Stack, Text, Select, Flex, SimpleGrid, useToast } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Avatar } from "@chakra-ui/react";
 
 export const EventsPage = () => {
   const [events, setEvents] = useState([]);
@@ -238,9 +239,17 @@ export const EventsPage = () => {
   // check if no events match the search query
   const noEventsMessage = filteredEvents.length === 0 ? 'No events match your search criteria.' : '';
 
+  // Get username and image from localStorage
+  const username = localStorage.getItem('username');
+  const userImage = localStorage.getItem('userImage');
+
   return (
     <Box p={4} display="flex" flexDirection="column" alignItems="center">
       <Heading mb={4}>List of Events</Heading>
+      <Box display="flex" alignItems="center" mb={4}>
+        <Avatar name={username} src={userImage || undefined} mr={2} />
+        <Text fontWeight="bold">Logged in as {username}</Text>
+      </Box>
       <Flex mb={4} width="100%" maxWidth="600px" justifyContent="center" alignItems="center">
         <Input
           placeholder="Search events"

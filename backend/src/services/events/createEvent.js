@@ -18,6 +18,7 @@ const createEvent = async (
 
   const event = await prisma.event.create({
     data: {
+  
       title,
       description,
       location,
@@ -35,5 +36,7 @@ const createEvent = async (
   console.log(event);
   return event;
 };
+
+
 
 export default createEvent;

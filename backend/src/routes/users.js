@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
   res.json(users);
 });
 //  POST /api/users
-router.post("/", auth, async(req, res) => {
+router.post("/", async(req, res) => {
   const { name, password, username, image } = req.body;
   const newUser = await createUser(username, name, password, image);
   res.status(201).json(newUser);
