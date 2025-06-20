@@ -62,7 +62,14 @@ export const EventsPage = () => {
         }
         const eventsData = await eventsResponse.json();
         console.log('Fetched events:', eventsData); // Debugging
-        setEvents(eventsData);
+
+        // Map categories to categoryIds for each event
+        const mappedEvents = eventsData.map(event => ({
+          ...event,
+          categoryIds: event.categories ? event.categories.map(cat => cat.id) : []
+        }));
+
+        setEvents(mappedEvents);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -155,7 +162,11 @@ export const EventsPage = () => {
         });
         if (!response.ok) throw new Error('Failed to update event');
         data = await response.json();
-        setEvents((prevEvents) => prevEvents.map(event => event.id === currentEventId ? data : event));
+        setEvents((prevEvents) =>
+          prevEvents.map(event =>
+            event.id === currentEventId ? data.event : event // <-- use data.event
+          )
+        );
         toast({
           title: "Event Updated.",
           description: "Updated the event!.",
@@ -225,17 +236,6 @@ export const EventsPage = () => {
 
 
 
-
-  // console.log("categories", categories);
-  // console.log("events category id", events.map(event => event.categoryIds));
-
-
-  // const eventsCategoryIds = events.map(event => event.categoryIds);
-  // console.log("event category ids", eventsCategoryIds);
-  // const categoryIds = categories.map(category => category.id);
-  // console.log("category ids", categoryIds);
-
-
   // check if no events match the search query
   const noEventsMessage = filteredEvents.length === 0 ? 'No events match your search criteria.' : '';
 
@@ -243,12 +243,20 @@ export const EventsPage = () => {
   const username = localStorage.getItem('username');
   const userImage = localStorage.getItem('userImage');
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("userImage");
+    navigate("/login");
+  };
+
   return (
     <Box p={4} display="flex" flexDirection="column" alignItems="center">
       <Heading mb={4}>List of Events</Heading>
       <Box display="flex" alignItems="center" mb={4}>
         <Avatar name={username} src={userImage || undefined} mr={2} />
         <Text fontWeight="bold">Logged in as {username}</Text>
+        <Button ml={4} colorScheme="red" onClick={handleLogout}>Logout</Button>
       </Box>
       <Flex mb={4} width="100%" maxWidth="600px" justifyContent="center" alignItems="center">
         <Input

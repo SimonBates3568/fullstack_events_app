@@ -35,7 +35,6 @@ export const EventPage = () => {
         console.log('Fetched Event Data:', data); // Debugging
         
         setEvent(data);
-
         setFormData({
           title: data.title,
           description: data.description,

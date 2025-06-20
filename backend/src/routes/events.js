@@ -67,11 +67,11 @@ router.delete("/:id", auth, async (req, res) => {
   }
 });
 // Update event by ID
-router.put("/:id", auth, async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
-      name,
+      title,
       description,
       location,
       image,
@@ -81,7 +81,7 @@ router.put("/:id", auth, async (req, res, next) => {
       categoryIds,
     } = req.body;
     const event = await updateEventById(id, {
-      name,
+      title,
       description,
       location,
       image,
@@ -94,6 +94,7 @@ router.put("/:id", auth, async (req, res, next) => {
     if (event) {
       res.status(200).send({
         message: `Event with id ${id} successfully updated`,
+        event, 
       });
     } else {
       res.status(404).json({
