@@ -69,13 +69,7 @@
             "password": "p@ssw0rd10",
             "name": "Mia Lee",
             "image": "https://randomuser.me/api/portraits/women/23.jpg"
-        },
-         {
-            "id": "11",
-            "username": "sibates08",
-            "password": "Sankeys@08",
-            "name": "simon bates",
-            "image": "https://i.pinimg.com/736x/0e/1a/af/0e1aaf3a4a339de94ef12a9a25481f60.jpg"
         }
+        
     ]
 }
