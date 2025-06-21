@@ -95,14 +95,11 @@ export const EventPage = () => {
     e.preventDefault();
     try {
       const payload = {
-        title: formData.title,
-        description: formData.description,
-        image: formData.image,
-        startTime: formData.startTime,
-        endTime: formData.endTime,
+        ...formData,
+        startTime: new Date(formData.startTime).toISOString(),
+        endTime: new Date(formData.endTime).toISOString(),
         categoryIds: [Number(formData.categoryId)],
-        location: formData.location
-      }
+      };
       const response = await fetch(`http://localhost:3000/events/${eventId}`, {
         method: 'PUT',
         headers: {
@@ -113,8 +110,19 @@ export const EventPage = () => {
       if (!response.ok) {
         throw new Error('Failed to update event');
       }
-      const data = await response.json();
-      setEvent(data);
+      // Fetch the updated event from backend
+      const updatedEventRes = await fetch(`http://localhost:3000/events/${eventId}`);
+      const updatedEvent = await updatedEventRes.json();
+      setEvent(updatedEvent);
+      setFormData({
+        title: updatedEvent.title,
+        description: updatedEvent.description,
+        startTime: updatedEvent.startTime,
+        endTime: updatedEvent.endTime,
+        location: updatedEvent.location,
+        categoryId: Array.isArray(updatedEvent.categoryIds) && updatedEvent.categoryIds.length > 0 ? updatedEvent.categoryIds[0] : '',
+        image: updatedEvent.image
+      });
       toast({
         title: "Event updated.",
         description: "The event has been successfully updated.",
@@ -186,7 +194,11 @@ console.log("event", event);
   return (
     <Box p={4} display="flex" flexDirection="column" alignItems="center">
       <Heading mb={4} fontWeight="bold" textAlign="center">{event.title}</Heading>
+       <Box flex="1" maxW="300px">
+          <Image src={event.image} alt={event.title} borderRadius="md" />
+        </Box>
       <Stack direction={{ base: 'column', md: 'row' }} spacing={4} justifyContent="center" alignItems="center">
+        
         <Box flex="1" textAlign="center">
           <Text mb={2}><strong>Description:</strong> {event.description}</Text>
           <Text mb={2}><strong>Start Time:</strong> {new Date(event.startTime).toLocaleString()}</Text>
@@ -194,9 +206,7 @@ console.log("event", event);
           <Text mb={2}><strong>Location:</strong> {event.location}</Text>
           <Text mb={2}><strong>Category:</strong> {event.categoryIds?.length > 0 ? categories.find(cat => cat.id === event.categoryIds[0])?.name : 'N/A'}</Text>
         </Box>
-        <Box flex="1" maxW="300px">
-          <Image src={event.image} alt={event.title} borderRadius="md" />
-        </Box>
+       
       </Stack>
       <Button colorScheme="blue" onClick={onOpen} mt={4} fontWeight="bold">EDIT</Button>
       <Button colorScheme="red" onClick={onAlertOpen} ml={4} mt={4} fontWeight="bold">DELETE</Button>

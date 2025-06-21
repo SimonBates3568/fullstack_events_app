@@ -52,6 +52,59 @@
       "location": "Shavasana Yoga School",
       "startTime": "2023-03-09T06:00:00.000Z",
       "endTime": "2023-03-09T07:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "createdBy": "3",
+      "title": "Board Game Night",
+      "description": "Bring your favorite board games and snacks.",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+      "categoryIds": [
+        "2"
+      ],
+      "location": "Community Center Room 2",
+      "startTime": "2023-05-12T19:00:00.000Z",
+      "endTime": "2023-05-12T22:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "createdBy": "1",
+      "title": "Cooking Workshop",
+      "description": "Learn to cook Italian cuisine.",
+      "image": "https://images.unsplash.com/photo-1519864600265-abb23847ef2c",
+      "categoryIds": [
+        "2"
+      ],
+      "location": "Downtown Kitchen Studio",
+      "startTime": "2023-06-01T17:00:00.000Z",
+      "endTime": "2023-06-01T20:00:00.000Z"
+    },
+    {
+      "id": "7",
+      "createdBy": "4",
+      "title": "Nature Hike",
+      "description": "Explore the local trails together.",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b",
+      "categoryIds": [
+        "2",
+        "3"
+      ],
+      "location": "Greenwood Forest Entrance",
+      "startTime": "2023-07-15T08:00:00.000Z",
+      "endTime": "2023-07-15T11:00:00.000Z"
+    },
+    {
+      "id": "8",
+      "createdBy": "2",
+      "title": "Art & Craft Fair",
+      "description": "Showcase your creativity and meet local artists.",
+      "image": "https://images.unsplash.com/photo-1503676382389-4809596d5290",
+      "categoryIds": [
+        "2"
+      ],
+      "location": "Town Hall Plaza",
+      "startTime": "2023-08-20T10:00:00.000Z",
+      "endTime": "2023-08-20T16:00:00.000Z"
     }
   ]
 }

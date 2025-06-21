@@ -33,33 +33,36 @@ export const LoginPage = ({ onLogin }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        value={username}
-        onChange={e => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button
-        type="submit"
-        style={{
-          backgroundColor: '#20b2aa', // teal green
-          color: '#fff',
-          padding: '10px 20px',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          fontSize: '16px'
-        }}
-      >
-        Login
-      </button>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-    </form>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+     
+      <form onSubmit={handleSubmit}>
+        <input
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          placeholder="Username"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button
+          type="submit"
+          style={{
+            backgroundColor: '#20b2aa', // teal green
+            color: '#fff',
+            padding: '10px 20px',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '16px'
+          }}
+        >
+          Login
+        </button>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+      </form>
+    </div>
   );
 };
